@@ -1,0 +1,93 @@
+<p-toast/>
+
+@if (!loading()) {
+  <form class="container" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <p-avatar
+      [icon]="ProfilePicture()?.objectURL?.changingThisBreaksApplicationSecurity? '' :'pi pi-user'"
+      [image]="ProfilePicture()?.objectURL?.changingThisBreaksApplicationSecurity"
+      size="xlarge"
+      shape="circle"/>
+    <p-inputGroup>
+      <p-inputGroupAddon>
+        <i class="pi pi-user"></i>
+      </p-inputGroupAddon>
+      <input id="f-name" formControlName="firstName" pInputText placeholder="First Name"/>
+    </p-inputGroup>
+
+    @if (firstName?.invalid && firstName?.dirty) {
+      <div class="error-message">
+        @if (firstName?.errors?.['required']) {
+          <small>First name is required.</small>
+        }
+      </div>
+    }
+
+    <p-inputGroup>
+      <p-inputGroupAddon>
+        <i class="pi pi-user"></i>
+      </p-inputGroupAddon>
+      <input id="l-name" formControlName="lastName" pInputText placeholder="Last Name"/>
+    </p-inputGroup>
+
+    @if (lastName?.invalid && lastName?.dirty) {
+      <div class="error-message">
+        @if (lastName?.errors?.['required']) {
+          <small>Last Name is required.</small>
+        }
+      </div>
+    }
+
+
+    <p-inputGroup>
+      <p-inputGroupAddon>
+        <i class="pi pi-at"></i>
+      </p-inputGroupAddon>
+      <input id="email" formControlName="email" pInputText placeholder="Email"/>
+    </p-inputGroup>
+
+    @if (email?.invalid && email?.dirty) {
+      <div class="error-message">
+        @if (email?.errors?.['required']) {
+          <small>Email is required.</small>
+        }
+        @if (email?.errors?.['email']) {
+          <small>Email is wrong</small>
+        }
+      </div>
+    }
+
+
+    <p-inputGroup>
+      <p-inputGroupAddon>
+        <i class="pi pi-phone"></i>
+      </p-inputGroupAddon>
+      <input id="phone" formControlName="phoneNumber" pInputText placeholder="Phone Number"/>
+    </p-inputGroup>
+
+    @if (phoneNumber?.invalid && phoneNumber?.dirty) {
+      <div class="error-message">
+        @if (phoneNumber?.errors?.['pattern']) {
+          <small>Phone number should contain only digits.</small>
+        }
+      </div>
+    }
+
+
+    <p-fileUpload
+      id="file-upload"
+      url="https://www.primefaces.org/cdn/api/upload.php"
+      (onSelect)="onUpload($event)"
+      [multiple]="false"
+      accept="image/*"
+      [showUploadButton]="false"
+      maxFileSize="1000000"
+    />
+
+    <p-button id="submit-btn" [disabled]="buttonDissabled" type="submit">Save</p-button>
+  </form>
+} @else {
+  <div class="spinner">
+    <p-progressSpinner ariaLabel="loading"/>
+  </div>
+
+}
