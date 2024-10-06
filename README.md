@@ -18,9 +18,30 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+Tests:
+1 Form Creation with Default Values
+Purpose:This test checks that the component initializes the form correctly with the expected structure and default values. It ensures that each form control is defined and starts with an empty string, indicating the form is ready for user input.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+2. Form Population with User Profile Data
+Purpose: This test validates that the getData method correctly fetches user profile data from the ProfileService and populates the form fields. The use of fakeAsync and tick simulates the passage of time, allowing asynchronous operations to complete before assertions are made.
+
+3. File Upload Handling
+Purpose:This test verifies that the onUpload method sets the newProfilePicture property correctly when a file is uploaded. It ensures that the component can handle file inputs as expected.
+
+4. Button Disabled State Based on Form Validity
+Purpose: This test checks whether the submit button is disabled when the form is invalid (e.g., when required fields are empty) and no profile picture is uploaded. It helps ensure that users cannot submit incomplete forms.
+
+5. Profile Update Submission
+Purpose:This test ensures that when the form is valid, the onSubmit method calls the updateUserProfile method from the ProfileService. The done callback signals the completion of an asynchronous operation, confirming that the profile update logic works as intended.
+
+Conclusion These tests collectively verify the essential functionalities of the UserProfileEditComponent, ensuring that:
+
+The form is initialized correctly.
+User data is fetched and populated properly.
+File uploads are handled as expected.
+The submit button's enabled/disabled state is managed correctly based on form validity.
+Profile updates are submitted when the form is valid.
+This approach provides a solid foundation for ensuring that the component behaves correctly under various scenarios, contributing to a robust user experience.
 
 ## Further help
 
