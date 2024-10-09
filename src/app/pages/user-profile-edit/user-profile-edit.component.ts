@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, OnInit, signal,} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {ChangeDetectionStrategy, Component, inject, OnInit, signal,} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
 import {InputGroupModule} from 'primeng/inputgroup';
@@ -10,8 +10,7 @@ import {HttpClient} from '@angular/common/http';
 import {ProfileService} from '../../api-service/profile.service';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {AvatarModule} from 'primeng/avatar';
-import {UserProfile} from '../../interfaces/profile.model';
-
+import {AddressGroupComponent} from '../address-form/address-form.component';
 
 @Component({
   selector: 'app-user-profile-edit',
@@ -24,7 +23,8 @@ import {UserProfile} from '../../interfaces/profile.model';
     FileUploadModule,
     ToastModule,
     ProgressSpinnerModule,
-    AvatarModule
+    AvatarModule,
+    AddressGroupComponent,
   ],
   templateUrl: './user-profile-edit.component.html',
   styleUrls: ['./user-profile-edit.component.css'],
@@ -33,14 +33,24 @@ import {UserProfile} from '../../interfaces/profile.model';
 })
 export class UserProfileEditComponent implements OnInit {
 
-  form!: FormGroup;
+
   newProfilePicture = signal<any>(null);
   ProfilePicture = signal<any>(null);
   loading = signal(true);
 
-  constructor(private fb: FormBuilder, private messageService: MessageService, private http: HttpClient, private profileService: ProfileService) {
-  }
 
+  fb = inject(FormBuilder)
+  messageService= inject(MessageService)
+  http = inject(HttpClient)
+  profileService = inject(ProfileService)
+
+
+  form = new FormGroup({
+    firstName: new FormControl('',[Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phoneNumber: new FormControl('', [Validators.pattern(/^[0-9]*$/)]),
+  })
   get firstName() {
     return this.form.get('firstName');
   }
@@ -62,18 +72,11 @@ export class UserProfileEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.createForm()
+
     this.getData()
   }
 
-  createForm() {
-    this.form = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', [Validators.pattern(/^[0-9]*$/)]],
-    });
-  }
+
 
   getData() {
     this.profileService.getUserProfile().subscribe((data) => {
@@ -89,9 +92,10 @@ export class UserProfileEditComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.form)
     if (this.form.valid) {
       this.loading.set(true);
-      const updatedProfile: UserProfile = {
+      const updatedProfile: any = {
         ...this.form.value,
         profilePicture: this.newProfilePicture() || null
       };

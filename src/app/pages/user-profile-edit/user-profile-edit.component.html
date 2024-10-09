@@ -83,6 +83,10 @@
       maxFileSize="1000000"
     />
 
+    <app-address-group [controlKey]="'address'" [label]="'address'"/>
+
+    <app-address-group [controlKey]="'billing'" [label]="'billing'"/>
+
     <p-button id="submit-btn" [disabled]="buttonDissabled" type="submit">Save</p-button>
   </form>
 } @else {
