@@ -1,0 +1,11 @@
+<div [formGroup]="form" class="flex-container">
+  @for (item of data; track item.key) {
+    <div>
+      <p-radioButton
+        [inputId]="item.key"
+        [value]="item.name"
+        [formControlName]="control"/>
+      {{ item.name }}
+    </div>
+  }
+</div>

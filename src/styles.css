@@ -1,3 +1,29 @@
 @import "primeng/resources/themes/lara-dark-purple/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
+
+.container{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 600px;
+  margin: 60px auto;
+  background: #111827;
+  padding: 20px 16px;
+  border-radius: 16px;
+  position: relative;
+}
+
+.container-row{
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
+  max-width: 600px;
+  margin: 60px auto;
+  background: #111827;
+  padding: 20px 16px;
+  border-radius: 16px;
+  position: relative;
+}

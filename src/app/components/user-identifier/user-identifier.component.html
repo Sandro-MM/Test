@@ -1,0 +1,9 @@
+
+@if(parentFormGroup.get(controlKey)){
+  <div class="container-row">
+    <input [style]="{width:'100%'}" [id]="controlKey" [formControlName]="controlKey" [placeholder]="controlKey" pInputText errorContext readonly/>
+    <p-button (onClick)="setUniqueIdentifier()" label="Generate" />
+  </div>
+}
+
+
