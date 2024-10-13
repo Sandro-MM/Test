@@ -1,8 +1,8 @@
 <div [formGroupName]="controlKey" class="container">
   <input errorContext formControlName="firstName" id="f-name" pInputText placeholder="First Name"/>
-  <app-radio-group [control]="'selectedGender'" [data]="genders" [form]="getNestedFormGroup()!"></app-radio-group>
   <input errorContext formControlName="lastName" id="l-name" pInputText placeholder="Last Name"/>
-  <label>Gender</label>
+  <div>Gender</div>
+  <app-radio-group [control]="'selectedGender'" [data]="genders" [form]="getNestedFormGroup()!"></app-radio-group>
   <input errorContext formControlName="pin" id="pin" pInputText placeholder="PIN"/>
   <input errorContext formControlName="address" id="address" pInputText placeholder="Address"/>
   <input errorContext formControlName="phoneNumber" id="phone" pInputText placeholder="Phone Number"/>
@@ -16,4 +16,3 @@
     url="https://www.primefaces.org/cdn/api/upload.php"
   />
 </div>
-

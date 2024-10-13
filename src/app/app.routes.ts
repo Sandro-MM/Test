@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'edit-profile',
+    path: 'manage-user',
     loadComponent: () => import('./pages/manage-user/manage-user.component').then(m => m.ManageUserComponent)
   },
   {
@@ -10,8 +10,16 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent)
   },
   {
+    path: 'register',
+    loadComponent: () => import('./pages/register/register.component').then(m => m.RegisterComponent)
+  },
+  {
+    path: 'dash',
+    loadComponent: () => import('./pages/users-dashboard/users-dashboard.component').then(m => m.UsersDashboardComponent)
+  },
+  {
     path: '**',
-    redirectTo: 'edit-profile'
+    redirectTo: 'login'
   }
 ];
 

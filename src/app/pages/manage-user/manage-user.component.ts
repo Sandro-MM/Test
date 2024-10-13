@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, ReactiveFormsModule, FormArray, FormControl} from '@angular/forms';
-import {UserProfileInfoComponent} from '../../components/user-profile-info/user-profile-info.component';
+import {UserProfileInfoEditComponent} from '../../components/user-profile-info-edit/user-profile-info-edit.component';
 import {UserIdentifierComponent} from '../../components/user-identifier/user-identifier.component';
 import {Button} from 'primeng/button';
 
 @Component({
   selector: 'app-manage-user',
   standalone: true,
-  imports: [ReactiveFormsModule, UserProfileInfoComponent, UserIdentifierComponent, Button],
+  imports: [ReactiveFormsModule, UserProfileInfoEditComponent, UserIdentifierComponent, Button],
   templateUrl: './manage-user.component.html',
   styleUrls: ['./manage-user.component.css']
 })

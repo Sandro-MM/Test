@@ -36,7 +36,7 @@ export class ErrorContextDirective implements OnInit, OnDestroy {
 
       // Subscribe to status changes
       this.statusChangesSubscription = this.formControl.statusChanges.subscribe(status => {
-        console.log(`FormControl ${this.formControlName} status: ${status}`);
+        console.log(`FormControl ${this.formControlName} status: ${status}`, this);
         this.displayError(componentRef.instance);
       });
 

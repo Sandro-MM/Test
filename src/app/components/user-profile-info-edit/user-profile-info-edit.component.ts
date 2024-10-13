@@ -7,7 +7,7 @@ import {englishLettersPattern, phonePattern, pinPattern} from '../error-handling
 import {RadioGroupComponent} from '../radio-group/radio-group.component';
 
 @Component({
-  selector: 'app-user-profile-edit',
+  selector: 'app-user-profile-info',
   standalone: true,
   imports: [
     RadioGroupComponent,
@@ -22,11 +22,11 @@ import {RadioGroupComponent} from '../radio-group/radio-group.component';
       useFactory: () => inject(ControlContainer, {skipSelf: true})
     }
   ],
-  templateUrl: './user-profile-info.component.html',
-  styleUrls: ['./user-profile-info.component.css'],
+  templateUrl: './user-profile-info-edit.component.html',
+  styleUrls: ['./user-profile-info-edit.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserProfileInfoComponent implements OnInit, OnDestroy {
+export class UserProfileInfoEditComponent implements OnInit, OnDestroy {
   parentContainer = inject(ControlContainer);
   @Input() controlKey = 'personalInfo';
   genders: any[] = [
@@ -45,18 +45,21 @@ export class UserProfileInfoComponent implements OnInit, OnDestroy {
         lastName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50), englishLettersPattern()]),
         pin: new FormControl('', [Validators.required, pinPattern(),]),
         address: new FormControl('', [Validators.required]),
-        phoneNumber: new FormControl('', [phonePattern()]),
+        phoneNumber: new FormControl('', [Validators.required,phonePattern()]),
         selectedGender: new FormControl('Man'),
-        profilePicture: new FormControl(null),
+        profilePicture: new FormControl('value'),
       }))
   }
 
   onFileSelect(event: any) {
     const file = event.files[0];
-    this.parentFormGroup.patchValue({
-      profilePicture: file
-    });
-    this.parentFormGroup.get('profilePicture')?.updateValueAndValidity();
+    const personalInfoGroup = this.parentFormGroup.get(this.controlKey) as FormGroup;
+    if (personalInfoGroup) {
+      personalInfoGroup.patchValue({
+        profilePicture: file
+      });
+      personalInfoGroup.get('profilePicture')?.updateValueAndValidity();
+    }
   }
 
   getNestedFormGroup(): FormGroup | null {

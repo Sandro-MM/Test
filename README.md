@@ -34,7 +34,7 @@ Purpose: This test checks whether the submit button is disabled when the form is
 5. Profile Update Submission
 Purpose:This test ensures that when the form is valid, the onSubmit method calls the updateUserProfile method from the ProfileService. The done callback signals the completion of an asynchronous operation, confirming that the profile update logic works as intended.
 
-Conclusion These tests collectively verify the essential functionalities of the UserProfileInfoComponent, ensuring that:
+Conclusion These tests collectively verify the essential functionalities of the UserProfileInfoEditComponent, ensuring that:
 
 The form is initialized correctly.
 User data is fetched and populated properly.

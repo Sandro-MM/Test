@@ -1,1 +1,10 @@
-<p>register works!</p>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <label>Fill User Details</label>
+  <app-user-profile-info/>
+  <label>Generate identifier</label>
+  <app-user-identifier/>
+  <label>Enter User Credentials</label>
+  <app-user-credentials/>
+  <p-button [disabled]="this.registerForm.invalid" label="Create Account" [style]="{margin:'auto', display: 'block'}" type="submit"/>
+</form>
+<label>Have account ? <p-button label="Login" [style]="{textDecoration:'underline'}" [link]="true" (onClick)="navigateToLogin()"/></label>

@@ -1,4 +1,7 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
- <app-user-credentials/>
-  <p-button type="submit">Submit</p-button>
+  <label>Enter credentials to log in</label>
+  <app-user-credentials/>
+  <p-button [disabled]="this.loginForm.invalid" [style]="{margin:'auto', display: 'block'}" type="submit" label="Login"/>
 </form>
+<label>Dont have account ? <p-button label="Register" [style]="{textDecoration:'underline'}" [link]="true" (onClick)="navigateToRegister()"/></label>
+

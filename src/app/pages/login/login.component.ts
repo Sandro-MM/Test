@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {UserCredentialsComponent} from '../../components/user-credentials/user-credentials.component';
 import {Button} from 'primeng/button';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ import {Button} from 'primeng/button';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  router = inject(Router)
   loginForm = new FormGroup({
 
   });
@@ -23,5 +25,9 @@ export class LoginComponent {
 
   onSubmit(): void {
     console.log(this.loginForm.value);
+  }
+
+  navigateToRegister() {
+    this.router.navigate(['/register']);
   }
 }
