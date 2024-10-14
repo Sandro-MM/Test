@@ -1,17 +1,19 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, ReactiveFormsModule, FormArray, FormControl} from '@angular/forms';
 import {UserProfileInfoEditComponent} from '../../components/user-profile-info-edit/user-profile-info-edit.component';
 import {UserIdentifierComponent} from '../../components/user-identifier/user-identifier.component';
 import {ButtonModule } from 'primeng/button';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserProfile} from '../../interfaces/profile.model';
+import {ChipModule} from 'primeng/chip';
 
 @Component({
   selector: 'app-manage-user',
   standalone: true,
-  imports: [ReactiveFormsModule, UserProfileInfoEditComponent, UserIdentifierComponent, ButtonModule],
+  imports: [ReactiveFormsModule, UserProfileInfoEditComponent, UserIdentifierComponent, ButtonModule, ChipModule],
   templateUrl: './manage-user.component.html',
-  styleUrls: ['./manage-user.component.css']
+  styleUrls: ['./manage-user.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ManageUserComponent implements OnInit {
   route= inject(ActivatedRoute)
@@ -32,8 +34,9 @@ export class ManageUserComponent implements OnInit {
   }
   getUser(){
     this.route.paramMap.subscribe(params => {
-      this.userIdentifier = params.get('userIdentifier') || '';
+      this.userIdentifier = params.get('identifier') || '';
     });
+    console.log(this.userIdentifier)
   }
   onSubmit() {
    console.log(this.manageUserForm)

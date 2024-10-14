@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import {TableModule} from 'primeng/table';
 import {IconFieldModule} from 'primeng/iconfield';
 import {InputIconModule} from 'primeng/inputicon';
@@ -25,7 +25,8 @@ import {UserProfile} from '../../interfaces/profile.model';
     TitleCasePipe
   ],
   templateUrl: './table-component.component.html',
-  styleUrl: './table-component.component.css'
+  styleUrl: './table-component.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponentComponent implements OnInit {
   @Input()stateKey ='defaultTable'
@@ -59,7 +60,91 @@ export class TableComponentComponent implements OnInit {
       "phoneNumber": "568223344",
       "selectedGender": "Man",
       "profilePicture": null
-    }
+    },
+    {
+      "firstName": "Sandro",
+      "lastName": "Martiashvili",
+      "pin": "44444444444",
+      "address": "Digomi Massive",
+      "phoneNumber": "568224554",
+      "selectedGender": "Man",
+      "profilePicture": "value"
+    },
+    {
+      "firstName": "GIo",
+      "lastName": "Giorgi",
+      "pin": "33444444433",
+      "address": "Didi Digomi",
+      "phoneNumber": "568223344",
+      "selectedGender": "Man",
+      "profilePicture": null,
+      "identifier":'159fcb9748f31c3639acbe2fae9aeedd445e4276ae712daca26da0b6854914bb'
+    },
+    {
+      "firstName": "Nika",
+      "lastName": "metro",
+      "pin": "5556643564",
+      "address": "Gldanski",
+      "phoneNumber": "568223344",
+      "selectedGender": "Man",
+      "profilePicture": null
+    },
+    {
+      "firstName": "Sandro",
+      "lastName": "Martiashvili",
+      "pin": "44444444444",
+      "address": "Digomi Massive",
+      "phoneNumber": "568224554",
+      "selectedGender": "Man",
+      "profilePicture": "value"
+    },
+    {
+      "firstName": "GIo",
+      "lastName": "Giorgi",
+      "pin": "33444444433",
+      "address": "Didi Digomi",
+      "phoneNumber": "568223344",
+      "selectedGender": "Man",
+      "profilePicture": null,
+      "identifier":'159fcb9748f31c3639acbe2fae9aeedd445e4276ae712daca26da0b6854914bb'
+    },
+    {
+      "firstName": "Nika",
+      "lastName": "metro",
+      "pin": "5556643564",
+      "address": "Gldanski",
+      "phoneNumber": "568223344",
+      "selectedGender": "Man",
+      "profilePicture": null
+    },
+    {
+      "firstName": "Sandro",
+      "lastName": "Martiashvili",
+      "pin": "44444444444",
+      "address": "Digomi Massive",
+      "phoneNumber": "568224554",
+      "selectedGender": "Man",
+      "profilePicture": "value"
+    },
+    {
+      "firstName": "GIo",
+      "lastName": "Giorgi",
+      "pin": "33444444433",
+      "address": "Didi Digomi",
+      "phoneNumber": "568223344",
+      "selectedGender": "Man",
+      "profilePicture": null,
+      "identifier":'159fcb9748f31c3639acbe2fae9aeedd445e4276ae712daca26da0b6854914bb'
+    },
+    {
+      "firstName": "Nika",
+      "lastName": "metro",
+      "pin": "5556643564",
+      "address": "Gldanski",
+      "phoneNumber": "568223344",
+      "selectedGender": "Man",
+      "profilePicture": null
+    },
   ];
 
   columns: string[] = [];

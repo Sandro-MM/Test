@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {ControlContainer, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ErrorContextDirective} from '../error-handling/form-error-handling/error-context.directive';
 import {InputTextModule} from 'primeng/inputtext';
@@ -20,7 +20,8 @@ import { ButtonModule} from 'primeng/button';
     }
   ],
   templateUrl: './user-identifier.component.html',
-  styleUrl: './user-identifier.component.css'
+  styleUrl: './user-identifier.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserIdentifierComponent implements OnInit, OnDestroy {
   parentContainer = inject(ControlContainer);

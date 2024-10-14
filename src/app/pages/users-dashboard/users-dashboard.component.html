@@ -1,8 +1,10 @@
 <label>Users List</label>
+<p-button (onClick)="addUser()" icon="pi pi-plus" [style]="{marginBottom:'16px'}" [rounded]="true" label="Add user" />
 <div class="user-table-container">
   <app-list-component (rowClick)="logRow($event)"/>
 </div>
 <p-dialog header="User Profile" [modal]="true" [(visible)]="visible" [style]="{ width: 'max-content' }">
+  <p-button (onClick)="editUser(userData?.identifier!)" icon="pi pi-pencil" [rounded]="true" [text]="true" label="edit" [size]="'small'" />
   <app-user-profile [UserData]="userData"  />
 </p-dialog>
 

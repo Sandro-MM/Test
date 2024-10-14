@@ -15,6 +15,18 @@ body {
   border-radius: 16px;
   position: relative;
 }
+.container-profile{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 660px;
+  margin:0 auto 16px;
+  background: #111827;
+  padding: 10px 16px;
+  border-radius: 16px;
+  position: relative;
+}
 
 .container-row{
   display: flex;

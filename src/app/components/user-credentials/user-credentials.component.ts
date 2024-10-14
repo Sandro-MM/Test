@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {ErrorContextDirective} from '../error-handling/form-error-handling/error-context.directive';
 import {InputTextModule} from 'primeng/inputtext';
 import {ControlContainer, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -18,7 +18,8 @@ import {passwordPattern} from '../error-handling/form-error-handling/pattern-for
     }
   ],
   templateUrl: './user-credentials.component.html',
-  styleUrl: './user-credentials.component.css'
+  styleUrl: './user-credentials.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserCredentialsComponent implements OnInit, OnDestroy {
   parentContainer = inject(ControlContainer);

@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {UserCredentialsComponent} from '../../components/user-credentials/user-credentials.component';
@@ -17,7 +17,8 @@ import {Router} from '@angular/router';
     UserProfileInfoEditComponent
   ],
   templateUrl: './add-user.component.html',
-  styleUrl: './add-user.component.css'
+  styleUrl: './add-user.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddUserComponent {
   router = inject(Router)

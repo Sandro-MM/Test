@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'manage-user',
+    path: 'manage-user/:identifier',
     loadComponent: () => import('./pages/manage-user/manage-user.component').then(m => m.ManageUserComponent)
   },
   {

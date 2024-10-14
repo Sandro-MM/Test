@@ -1,11 +1,17 @@
 <div [formGroupName]="controlKey" class="container">
+  <div>First Name</div>
   <input errorContext formControlName="firstName" id="f-name" pInputText placeholder="First Name"/>
+  <div>Last Name</div>
   <input errorContext formControlName="lastName" id="l-name" pInputText placeholder="Last Name"/>
   <div>Gender</div>
   <app-radio-group [control]="'selectedGender'" [data]="genders" [form]="getNestedFormGroup()!"></app-radio-group>
+  <div>PIN</div>
   <input errorContext formControlName="pin" id="pin" pInputText placeholder="PIN"/>
+  <div>Address</div>
   <input errorContext formControlName="address" id="address" pInputText placeholder="Address"/>
+  <div>Phone Number</div>
   <input errorContext formControlName="phoneNumber" id="phone" pInputText placeholder="Phone Number"/>
+  <div>Profile Picture</div>
   <p-fileupload
     (onSelect)="onFileSelect($event)"
     [multiple]="false"
