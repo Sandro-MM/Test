@@ -2,7 +2,7 @@ import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {ControlContainer, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ErrorContextDirective} from '../error-handling/form-error-handling/error-context.directive';
 import {InputTextModule} from 'primeng/inputtext';
-import {Button} from 'primeng/button';
+import { ButtonModule} from 'primeng/button';
 @Component({
   selector: 'app-user-identifier',
   standalone: true,
@@ -11,7 +11,7 @@ import {Button} from 'primeng/button';
     FormsModule,
     InputTextModule,
     ReactiveFormsModule,
-    Button
+    ButtonModule
   ],
   viewProviders: [
     {

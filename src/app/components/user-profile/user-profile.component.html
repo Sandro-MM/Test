@@ -1,0 +1,16 @@
+<div class="container">
+  <p-chip [style]="{'word-break': 'break-all'}" [label]="UserData?.identifier" icon="pi pi-key" />
+  <p-avatar
+    [image]="UserData?.profilePicture?UserData?.profilePicture:''"
+    [icon]="UserData?.profilePicture?'':'pi pi-user'"
+    size="xlarge"
+    shape="circle" />
+  <div>User Info:</div>
+  <div style="display: flex; gap: 12px; flex-wrap: wrap">
+    <p-chip [label]="UserData?.firstName+' '+UserData?.lastName" icon="pi pi-user" />
+    <p-chip [label]="UserData?.address" icon="pi pi-home" />
+    <p-chip [label]="UserData?.phoneNumber" icon="pi pi-phone" />
+    <p-chip [label]="UserData?.pin" icon="pi pi-id-card" />
+    <p-chip [label]="UserData?.selectedGender" icon="pi pi-info-circle" />
+  </div>
+</div>

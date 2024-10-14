@@ -1,37 +1,33 @@
 import {Component, inject} from '@angular/core';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
-import {FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserCredentialsComponent} from '../../components/user-credentials/user-credentials.component';
-import {ManageUserComponent} from '../manage-user/manage-user.component';
 import {UserIdentifierComponent} from '../../components/user-identifier/user-identifier.component';
 import {UserProfileInfoEditComponent} from '../../components/user-profile-info-edit/user-profile-info-edit.component';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-add-user',
   standalone: true,
   imports: [
-    ButtonModule ,
-    FormsModule,
-    UserCredentialsComponent,
+    ButtonModule,
     ReactiveFormsModule,
-    ManageUserComponent,
+    UserCredentialsComponent,
     UserIdentifierComponent,
     UserProfileInfoEditComponent
   ],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  templateUrl: './add-user.component.html',
+  styleUrl: './add-user.component.css'
 })
-export class RegisterComponent {
+export class AddUserComponent {
   router = inject(Router)
-  registerForm = new FormGroup({});
-  ngOnInit(): void {
-  }
-  onSubmit(): void {
-    console.log(this.registerForm.value);
+  newUserForm = new FormGroup({});
+
+  onSubmit() {
+    console.log(this.newUserForm)
   }
 
-  navigateToLogin() {
-    this.router.navigate(['/login']);
+  navigateToDash() {
+    this.router.navigate(['/dash']);
   }
 }

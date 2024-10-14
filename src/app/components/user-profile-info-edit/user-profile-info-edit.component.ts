@@ -5,6 +5,7 @@ import {FileUploadModule} from 'primeng/fileupload';
 import {ErrorContextDirective} from '../error-handling/form-error-handling/error-context.directive';
 import {englishLettersPattern, phonePattern, pinPattern} from '../error-handling/form-error-handling/pattern-formats';
 import {RadioGroupComponent} from '../radio-group/radio-group.component';
+import {UserProfile} from '../../interfaces/profile.model';
 
 @Component({
   selector: 'app-user-profile-info',
@@ -28,16 +29,15 @@ import {RadioGroupComponent} from '../radio-group/radio-group.component';
 })
 export class UserProfileInfoEditComponent implements OnInit, OnDestroy {
   parentContainer = inject(ControlContainer);
+  @Input() formData!: UserProfile;
   @Input() controlKey = 'personalInfo';
   genders: any[] = [
     {name: 'Man', key: 'M'},
     {name: 'Woman', key: 'W'},
   ];
-
   get parentFormGroup() {
     return this.parentContainer.control as FormGroup;
   }
-
   ngOnInit() {
     this.parentFormGroup.addControl(this.controlKey,
       new FormGroup({
@@ -47,10 +47,10 @@ export class UserProfileInfoEditComponent implements OnInit, OnDestroy {
         address: new FormControl('', [Validators.required]),
         phoneNumber: new FormControl('', [Validators.required,phonePattern()]),
         selectedGender: new FormControl('Man'),
-        profilePicture: new FormControl('value'),
+        profilePicture: new FormControl(null,[Validators.required]),
       }))
+    this.setData(this.formData)
   }
-
   onFileSelect(event: any) {
     const file = event.files[0];
     const personalInfoGroup = this.parentFormGroup.get(this.controlKey) as FormGroup;
@@ -61,7 +61,6 @@ export class UserProfileInfoEditComponent implements OnInit, OnDestroy {
       personalInfoGroup.get('profilePicture')?.updateValueAndValidity();
     }
   }
-
   getNestedFormGroup(): FormGroup | null {
     const formGroup = this.parentFormGroup.get(this.controlKey) as FormGroup;
     if (!formGroup) {
@@ -70,8 +69,11 @@ export class UserProfileInfoEditComponent implements OnInit, OnDestroy {
     }
     return formGroup;
   }
-
+  setData(setData: UserProfile ){
+      this.parentFormGroup.get(this.controlKey)?.patchValue(setData);
+  }
   ngOnDestroy() {
     this.parentFormGroup.removeControl(this.controlKey);
   }
+
 }

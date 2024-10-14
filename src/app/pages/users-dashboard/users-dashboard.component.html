@@ -1,1 +1,8 @@
-<p>users-dashboard works!</p>
+<label>Users List</label>
+<div class="user-table-container">
+  <app-list-component (rowClick)="logRow($event)"/>
+</div>
+<p-dialog header="User Profile" [modal]="true" [(visible)]="visible" [style]="{ width: 'max-content' }">
+  <app-user-profile [UserData]="userData"  />
+</p-dialog>
+

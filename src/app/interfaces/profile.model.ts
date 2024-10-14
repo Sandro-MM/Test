@@ -1,8 +1,10 @@
 export interface UserProfile {
-  id?: number;
   firstName: string;
   lastName: string;
-  email: string;
-  phoneNumber?: string;
-  profilePicture?: any
+  pin: string;
+  address: string;
+  phoneNumber: string;
+  selectedGender: 'Man' | 'Woman';
+  profilePicture?: any;
+  identifier?: string;
 }

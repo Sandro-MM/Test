@@ -1,0 +1,9 @@
+
+<p-button (onClick)="navigateToDash()" icon="pi pi-arrow-left" [rounded]="true" /><label>Add new User</label>
+<form [formGroup]="newUserForm" class="container-register" (ngSubmit)="onSubmit()">
+  <label>Fill User Details</label>
+  <app-user-profile-info/>
+  <label>Generate identifier</label>
+  <app-user-identifier/>
+</form>
+<p-button [disabled]="this.newUserForm.invalid" label="Create Account" [style]="{margin:'auto', display: 'block'}" type="submit"/>

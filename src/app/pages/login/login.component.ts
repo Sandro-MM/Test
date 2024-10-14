@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {UserCredentialsComponent} from '../../components/user-credentials/user-credentials.component';
-import {Button} from 'primeng/button';
+import {ButtonModule } from 'primeng/button';
 import {Router} from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
   imports: [
     ReactiveFormsModule,
     UserCredentialsComponent,
-    Button
+    ButtonModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
