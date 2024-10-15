@@ -6,6 +6,7 @@ import {ButtonModule } from 'primeng/button';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserProfile} from '../../interfaces/profile.model';
 import {ChipModule} from 'primeng/chip';
+import {ManageUserService} from './manage-user.service';
 
 @Component({
   selector: 'app-manage-user',
@@ -13,6 +14,7 @@ import {ChipModule} from 'primeng/chip';
   imports: [ReactiveFormsModule, UserProfileInfoEditComponent, UserIdentifierComponent, ButtonModule, ChipModule],
   templateUrl: './manage-user.component.html',
   styleUrls: ['./manage-user.component.css'],
+  providers:[ManageUserService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ManageUserComponent implements OnInit {

@@ -4,9 +4,10 @@ import {catchError, delay, finalize, of, tap} from 'rxjs';
 import {ApiService} from '../../api-service/apiService.service';
 import {setErrorMessage} from '../../components/error-handling/api-error-function';
 import {UserRegister} from '../../interfaces/register.model';
+import {RegisterComponent} from './register.component';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: RegisterComponent,
 })
 export class RegisterService {
   private apiService = inject(ApiService);

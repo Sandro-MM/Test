@@ -1,33 +1,20 @@
 import {Component, Input} from '@angular/core';
+import {Message} from 'primeng/message';
 
 @Component({
   selector: 'app-error',
   template: `
 
-    @if(errorMessage){
-      <div class="error-message">
+    @if (errorMessage) {
+      <p-message severity="error">
         {{ errorMessage }}
-      </div>
+      </p-message>
     }
   `,
-  styles: [`
-    .error-message {
-      margin: 5px 0;
-      width: max-content;
-      color: white;
-      padding: 2px 6px;
-      background: #bb1b1b;
-      border-radius:2px;
-      font-size: 14px;
-
-    }
-
-    :host {
-      display: block;
-      position: relative;
-    }
-  `],
   standalone: true,
+  imports: [
+    Message
+  ]
 })
 export class ErrorComponentComponent {
   @Input() errorMessage: string | null = null;

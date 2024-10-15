@@ -26,7 +26,7 @@ import {ToastModule} from 'primeng/toast';
     ProgressSpinnerModule,
     ToastModule,
   ],
-  providers:[MessageService],
+  providers:[RegisterService],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -43,9 +43,13 @@ export class RegisterComponent{
   constructor() {
     effect(() => {
       const response = this.responseStatus();
+      const error = this.isError();
       if (response) {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register success' });
         this.router.navigate(['/dash']);
+      }
+      if (error) {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Register Error' });
       }
     });
   }

@@ -17,7 +17,7 @@ import {MessageService} from 'primeng/api';
     ButtonModule,
     ProgressSpinnerModule
   ],
-  providers:[MessageService],
+  providers:[LoginService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -34,9 +34,13 @@ export class LoginComponent {
   constructor() {
     effect(() => {
       const response = this.responseStatus();
+      const error = this.isError();
       if (response) {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Login success' });
         this.router.navigate(['/dash']);
+      }
+      if (error) {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Login error' });
       }
     });
   }
