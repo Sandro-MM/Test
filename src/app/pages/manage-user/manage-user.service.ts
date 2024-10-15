@@ -21,7 +21,7 @@ export class ManageUserService{
     error: null
   })
 
-  isLoadingFetch:Signal<boolean> = computed(() => this.state().isLoading);
+  isLoadingSelector:Signal<boolean> = computed(() => this.state().isLoading);
   userSelector:Signal<UserProfile | undefined> = computed(() => this.state().user);
   responseSelector: Signal<any> = computed(() => this.state().response);
   errorMessageSelector:Signal<string | null> = computed(() => this.state().error);
@@ -31,6 +31,8 @@ export class ManageUserService{
     this.apiService.getUserById(id).pipe(
       filter((user): user is UserProfile => !!user),
       tap((user: UserProfile) => this.updateUser(user)),
+      tap((user: UserProfile) => console.log(user)),
+
       catchError((err: HttpErrorResponse) => {
         this.handleError(err);
         return of();
@@ -41,14 +43,10 @@ export class ManageUserService{
 
   public deleteUser(id: string) {
     this.setLoadingIndicator(true);
-
     this.apiService.deleteUserById(id).pipe(
-      tap((response: any) => {
-        if (response) {
+      tap(() => {
           this.setResponse('deleted');
-        }
       }),
-      delay(1000),
       catchError((err: HttpErrorResponse) => {
         this.handleError(err);
         return of(undefined);
@@ -66,7 +64,7 @@ export class ManageUserService{
           this.setResponse('edited');
         }
       }),
-      delay(1000),
+
       catchError((err: HttpErrorResponse) => {
         this.handleError(err);
         return of(undefined);

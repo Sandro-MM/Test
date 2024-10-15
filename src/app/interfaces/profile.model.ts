@@ -7,4 +7,5 @@ export interface UserProfile {
   selectedGender: 'Man' | 'Woman';
   profilePicture?: any;
   identifier?: string;
+  id?: string;
 }

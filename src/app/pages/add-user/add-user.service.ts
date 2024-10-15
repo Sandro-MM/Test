@@ -32,7 +32,6 @@ export class AddUserService {
           this.setResponse(true);
         }
       }),
-      delay(1000),
       catchError((err: HttpErrorResponse) => {
         this.handleError(err);
         return of(undefined);

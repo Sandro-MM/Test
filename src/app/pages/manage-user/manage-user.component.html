@@ -1,9 +1,15 @@
 <p-button (onClick)="navigateToDash()" icon="pi pi-arrow-left" [rounded]="true" />
 <label>Edit user</label>
-<p-button [style]="{position:'absolute',right:'10px',top:'10px'}" (onClick)="navigateToDash()" icon="pi pi-trash" [rounded]="true" />
-<p-chip [style]="{'word-break': 'break-all',margin:'auto', display:'flex', maxWidth:'max-content'}" [label]="userIdentifier" icon="pi pi-key" />
-<form [formGroup]="manageUserForm" (ngSubmit)="onSubmit()">
-  <app-user-profile-info [formData]="data"/>
-</form>
-<p-button label="Edit user" [style]="{margin:'auto', display: 'block'}" [disabled]="submitDisabled" type="submit"/>
+
+@if (!isLoading()){
+  <p-button [style]="{position:'absolute',right:'10px',top:'10px'}" (onClick)="delUser()" icon="pi pi-trash" [rounded]="true" />
+  <p-chip [style]="{'word-break': 'break-all',margin:'auto', display:'flex', maxWidth:'max-content'}" [label]="userIdentifier" icon="pi pi-key" />
+  <form [formGroup]="manageUserForm" (ngSubmit)="onSubmit()">
+    <app-user-profile-info [formData]="user()!"/>
+  </form>
+  <p-button label="Edit user" [style]="{margin:'auto', display: 'block'}" [disabled]="submitDisabled" type="submit"/>
+} @else {
+  <p-progressSpinner strokeWidth="4" [style]="{margin:'0 auto', display:'block', width:'90px', height:'90px'}"  ariaLabel="loading" />
+}
+
 
