@@ -6,5 +6,12 @@
   <label>Enter User Credentials</label>
   <app-user-credentials/>
 </form>
-<label>Have account ? <p-button label="Login" [style]="{textDecoration:'underline'}" [link]="true" (onClick)="navigateToLogin()"/></label>
-<p-button [disabled]="this.registerForm.invalid" label="Create Account" [style]="{margin:'auto', display: 'block'}" type="submit"/>
+
+@if (!isLoading()){
+  <label>Have account ? <p-button label="Login" [style]="{textDecoration:'underline'}" [link]="true" (onClick)="navigateToLogin()"/></label>
+  <p-button (onClick)="onSubmit()" [disabled]="this.registerForm.invalid" label="Create Account" [style]="{margin:'auto', display: 'block'}" type="submit"/>
+} @else {
+  <p-progressSpinner strokeWidth="5" [style]="{margin:'0 auto', display:'block', width:'50px', height:'50px'}"  ariaLabel="loading" />
+}
+<p-toast/>
+

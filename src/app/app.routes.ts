@@ -1,9 +1,14 @@
 import { Routes } from '@angular/router';
+import {AuthGuard} from './guards/auth-guard.guard';
+import {userListResolver} from './resolvers/user-list.resolver';
+
+
 
 export const routes: Routes = [
   {
     path: 'manage-user/:identifier',
-    loadComponent: () => import('./pages/manage-user/manage-user.component').then(m => m.ManageUserComponent)
+    loadComponent: () => import('./pages/manage-user/manage-user.component').then(m => m.ManageUserComponent),
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -15,11 +20,16 @@ export const routes: Routes = [
   },
   {
     path: 'add-user',
-    loadComponent: () => import('./pages/add-user/add-user.component').then(m => m.AddUserComponent)
+    loadComponent: () => import('./pages/add-user/add-user.component').then(m => m.AddUserComponent),
+    canActivate: [AuthGuard]
   },
   {
     path: 'dash',
-    loadComponent: () => import('./pages/users-dashboard/users-dashboard.component').then(m => m.UsersDashboardComponent)
+    loadComponent: () => import('./pages/users-dashboard/users-dashboard.component').then(m => m.UsersDashboardComponent),
+    canActivate: [AuthGuard],
+    resolve: {
+      userData: userListResolver
+    }
   },
   {
     path: '**',

@@ -8,7 +8,6 @@ import {DropdownModule} from 'primeng/dropdown';
 import {TagModule} from 'primeng/tag';
 import {NgClass, TitleCasePipe} from '@angular/common';
 import {Router} from '@angular/router';
-import {UserProfile} from '../../interfaces/profile.model';
 
 @Component({
   selector: 'app-list-component',
@@ -30,132 +29,22 @@ import {UserProfile} from '../../interfaces/profile.model';
 })
 export class TableComponentComponent implements OnInit {
   @Input()stateKey ='defaultTable'
-  @Output() rowClick = new EventEmitter<UserProfile>();
+  @Output() rowClick = new EventEmitter<any>();
 
-  data = [
-    {
-      "firstName": "Sandro",
-      "lastName": "Martiashvili",
-      "pin": "44444444444",
-      "address": "Digomi Massive",
-      "phoneNumber": "568224554",
-      "selectedGender": "Man",
-      "profilePicture": "value"
-    },
-    {
-      "firstName": "GIo",
-      "lastName": "Giorgi",
-      "pin": "33444444433",
-      "address": "Didi Digomi",
-      "phoneNumber": "568223344",
-      "selectedGender": "Man",
-      "profilePicture": null,
-      "identifier":'159fcb9748f31c3639acbe2fae9aeedd445e4276ae712daca26da0b6854914bb'
-    },
-    {
-      "firstName": "Nika",
-      "lastName": "metro",
-      "pin": "5556643564",
-      "address": "Gldanski",
-      "phoneNumber": "568223344",
-      "selectedGender": "Man",
-      "profilePicture": null
-    },
-    {
-      "firstName": "Sandro",
-      "lastName": "Martiashvili",
-      "pin": "44444444444",
-      "address": "Digomi Massive",
-      "phoneNumber": "568224554",
-      "selectedGender": "Man",
-      "profilePicture": "value"
-    },
-    {
-      "firstName": "GIo",
-      "lastName": "Giorgi",
-      "pin": "33444444433",
-      "address": "Didi Digomi",
-      "phoneNumber": "568223344",
-      "selectedGender": "Man",
-      "profilePicture": null,
-      "identifier":'159fcb9748f31c3639acbe2fae9aeedd445e4276ae712daca26da0b6854914bb'
-    },
-    {
-      "firstName": "Nika",
-      "lastName": "metro",
-      "pin": "5556643564",
-      "address": "Gldanski",
-      "phoneNumber": "568223344",
-      "selectedGender": "Man",
-      "profilePicture": null
-    },
-    {
-      "firstName": "Sandro",
-      "lastName": "Martiashvili",
-      "pin": "44444444444",
-      "address": "Digomi Massive",
-      "phoneNumber": "568224554",
-      "selectedGender": "Man",
-      "profilePicture": "value"
-    },
-    {
-      "firstName": "GIo",
-      "lastName": "Giorgi",
-      "pin": "33444444433",
-      "address": "Didi Digomi",
-      "phoneNumber": "568223344",
-      "selectedGender": "Man",
-      "profilePicture": null,
-      "identifier":'159fcb9748f31c3639acbe2fae9aeedd445e4276ae712daca26da0b6854914bb'
-    },
-    {
-      "firstName": "Nika",
-      "lastName": "metro",
-      "pin": "5556643564",
-      "address": "Gldanski",
-      "phoneNumber": "568223344",
-      "selectedGender": "Man",
-      "profilePicture": null
-    },
-    {
-      "firstName": "Sandro",
-      "lastName": "Martiashvili",
-      "pin": "44444444444",
-      "address": "Digomi Massive",
-      "phoneNumber": "568224554",
-      "selectedGender": "Man",
-      "profilePicture": "value"
-    },
-    {
-      "firstName": "GIo",
-      "lastName": "Giorgi",
-      "pin": "33444444433",
-      "address": "Didi Digomi",
-      "phoneNumber": "568223344",
-      "selectedGender": "Man",
-      "profilePicture": null,
-      "identifier":'159fcb9748f31c3639acbe2fae9aeedd445e4276ae712daca26da0b6854914bb'
-    },
-    {
-      "firstName": "Nika",
-      "lastName": "metro",
-      "pin": "5556643564",
-      "address": "Gldanski",
-      "phoneNumber": "568223344",
-      "selectedGender": "Man",
-      "profilePicture": null
-    },
-  ];
+  @Input() data : any
 
   columns: string[] = [];
   router = inject(Router)
   ngOnInit() {
-    if (this.data.length > 0) {
-      this.columns = Object.keys(this.data[0]);
+
+    if (!(this.data) || this.data.length > 0) {
+      if (this.data) {
+        this.columns = Object.keys(this.data[0]);
+      }
     }
   }
 
-  onRowClick(data:UserProfile){
+  onRowClick(data:any){
     this.rowClick.emit(data);
   }
 }

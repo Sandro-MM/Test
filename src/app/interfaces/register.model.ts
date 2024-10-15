@@ -1,5 +1,13 @@
+import {UserLogin} from './login.model';
+
 export interface UserRegister {
-  email: string;
+  personalInfo: UserPersonalInfo,
+  credentials: UserLogin
+  identifier?: string;
+}
+
+
+export interface UserPersonalInfo {
   password: string;
   firstName: string;
   lastName: string;
@@ -8,5 +16,4 @@ export interface UserRegister {
   phoneNumber: string;
   selectedGender: 'Man' | 'Woman';
   profilePicture?: any;
-  identifier?: string;
 }
