@@ -9,6 +9,7 @@ import {ChipModule} from 'primeng/chip';
 import {ManageUserService} from './manage-user.service';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {MessageService} from 'primeng/api';
+import {UserRegister} from '../../interfaces/register.model';
 
 @Component({
   selector: 'app-manage-user',
@@ -52,14 +53,15 @@ export class ManageUserComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.userIdentifier = params.get('identifier') || '';
+    });
     this.getUser()
   }
 
 
   getUser(){
-    this.route.paramMap.subscribe(params => {
-      this.userIdentifier = params.get('identifier') || '';
-    });
+
     this.manageUserService.fetchUser(this.userIdentifier)
   }
 
@@ -67,7 +69,10 @@ export class ManageUserComponent implements OnInit {
     this.manageUserService.deleteUser(this.userIdentifier)
   }
   onSubmit() {
-   console.log(this.manageUserForm)
+    const userData = this.manageUserForm.get('personalInfo')?.value;
+    const data = userData! as UserProfile;
+    this.manageUserService.editUser(this.userIdentifier, data)
+
   }
   get submitDisabled() {
     return this.manageUserForm.invalid

@@ -7,7 +7,7 @@
   <form [formGroup]="manageUserForm" (ngSubmit)="onSubmit()">
     <app-user-profile-info [formData]="user()!"/>
   </form>
-  <p-button label="Edit user" [style]="{margin:'auto', display: 'block'}" [disabled]="submitDisabled" type="submit"/>
+  <p-button (onClick)="onSubmit()" label="Edit user" [style]="{margin:'auto', display: 'block'}" [disabled]="submitDisabled" type="submit"/>
 } @else {
   <p-progressSpinner strokeWidth="4" [style]="{margin:'0 auto', display:'block', width:'90px', height:'90px'}"  ariaLabel="loading" />
 }

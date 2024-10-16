@@ -60,9 +60,7 @@ export class ManageUserService{
 
     this.apiService.updateUserById(id,data).pipe(
       tap((response: any) => {
-        if (response) {
           this.setResponse('edited');
-        }
       }),
 
       catchError((err: HttpErrorResponse) => {

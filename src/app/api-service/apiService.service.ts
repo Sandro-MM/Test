@@ -61,7 +61,17 @@ export class ApiService {
 
   updateUserById(identifier: string, updatedData: Partial<UserProfile>): Observable<void> {
     const userDocRef = doc(this.firestore, `users/${identifier}`);
-    return from(updateDoc(userDocRef, { ...updatedData }));
+    if (updatedData.profilePicture && updatedData.profilePicture.objectURL) {
+      const filePath = `profilePictures/${identifier}`;
+      return this.uploadProfilePicture(updatedData.profilePicture.objectURL.changingThisBreaksApplicationSecurity, filePath).pipe(
+        switchMap((downloadURL) => {
+          updatedData.profilePicture = downloadURL;
+          return from(updateDoc(userDocRef, { ...updatedData }));
+        })
+      );
+    } else {
+      return from(updateDoc(userDocRef, { ...updatedData }));
+    }
   }
 
   deleteUserById(identifier: string): Observable<void> {
