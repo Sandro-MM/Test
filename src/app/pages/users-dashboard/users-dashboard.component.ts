@@ -1,11 +1,11 @@
-import {ChangeDetectionStrategy, Component, inject, OnInit, Signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, Signal} from '@angular/core';
 import {TableComponentComponent} from '../../components/list-component/table-component.component';
 import {DialogModule} from 'primeng/dialog';
 import {UserProfile} from '../../interfaces/profile.model';
 import {UserProfileComponent} from '../../components/user-profile/user-profile.component';
 import {ButtonModule} from 'primeng/button';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserListState, UsersDashboardService} from './users-dashboard.service';
+import {UsersDashboardService} from './users-dashboard.service';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 

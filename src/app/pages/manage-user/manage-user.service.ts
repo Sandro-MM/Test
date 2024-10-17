@@ -1,12 +1,10 @@
-import {booleanAttribute, computed, inject, Injectable, Signal, signal} from '@angular/core';
+import { computed, inject, Injectable, Signal, signal} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {UserProfile} from '../../interfaces/profile.model';
-import {catchError, delay, filter, finalize, Observable, of, tap} from 'rxjs';
+import {catchError, filter, finalize, Observable, of, tap} from 'rxjs';
 import {ApiService} from '../../api-service/apiService.service';
 import {setErrorMessage} from '../../components/error-handling/api-error-function';
 import {ManageUserComponent} from './manage-user.component';
-import {UserRegister} from '../../interfaces/register.model';
-import {RegisterState} from '../register/register.service';
 
 @Injectable({
   providedIn: ManageUserComponent

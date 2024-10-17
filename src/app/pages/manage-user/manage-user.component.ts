@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, effect, inject, OnInit, Signal} from '@angular/core';
-import {FormGroup, FormBuilder, ReactiveFormsModule, FormArray, FormControl} from '@angular/forms';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {UserProfileInfoEditComponent} from '../../components/user-profile-info-edit/user-profile-info-edit.component';
 import {UserIdentifierComponent} from '../../components/user-identifier/user-identifier.component';
 import {ButtonModule } from 'primeng/button';
@@ -9,8 +9,6 @@ import {ChipModule} from 'primeng/chip';
 import {ManageUserService} from './manage-user.service';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {MessageService} from 'primeng/api';
-import {UserRegister} from '../../interfaces/register.model';
-
 @Component({
   selector: 'app-manage-user',
   standalone: true,

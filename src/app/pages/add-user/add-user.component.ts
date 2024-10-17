@@ -6,7 +6,6 @@ import {UserIdentifierComponent} from '../../components/user-identifier/user-ide
 import {UserProfileInfoEditComponent} from '../../components/user-profile-info-edit/user-profile-info-edit.component';
 import {Router} from '@angular/router';
 import {AddUserService} from './add-user.service';
-import {UserLogin} from '../../interfaces/login.model';
 import {UserProfile} from '../../interfaces/profile.model';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {MessageService} from 'primeng/api';

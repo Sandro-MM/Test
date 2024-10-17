@@ -4,8 +4,6 @@ import {UserProfile} from '../../interfaces/profile.model';
 import {catchError, finalize, Observable, of, tap} from 'rxjs';
 import {ApiService} from '../../api-service/apiService.service';
 import {setErrorMessage} from '../../components/error-handling/api-error-function';
-import {UsersDashboardComponent} from './users-dashboard.component';
-import {userListResolver} from '../../resolvers/user-list.resolver';
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import {AuthGuard} from './guards/auth-guard.guard';
-import {userListResolver} from './resolvers/user-list.resolver';
 
 
 
@@ -27,9 +26,6 @@ export const routes: Routes = [
     path: 'dash',
     loadComponent: () => import('./pages/users-dashboard/users-dashboard.component').then(m => m.UsersDashboardComponent),
     canActivate: [AuthGuard],
-    resolve: {
-      userData: userListResolver
-    }
   },
   {
     path: '**',
