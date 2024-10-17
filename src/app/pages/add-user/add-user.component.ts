@@ -21,7 +21,7 @@ import {MessageService} from 'primeng/api';
     UserProfileInfoEditComponent,
     ProgressSpinnerModule
   ],
-  providers:[AddUserService],
+  providers: [AddUserService],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -32,27 +32,27 @@ export class AddUserComponent {
   messageService = inject(MessageService)
   newUserForm = new FormGroup({});
 
-  isLoading:Signal<boolean> = this.addUserService.isLoadingSelector
-  responseStatus:Signal<boolean> = this.addUserService.responseSelector
-  isError:Signal<string | null> = this.addUserService.errorMessageSelector
+  isLoading: Signal<boolean> = this.addUserService.isLoadingSelector
+  responseStatus: Signal<boolean> = this.addUserService.responseSelector
+  isError: Signal<string | null> = this.addUserService.errorMessageSelector
 
   constructor() {
     effect(() => {
       const response = this.responseStatus();
       const error = this.isError();
       if (response) {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'User Added' });
+        this.messageService.add({severity: 'success', summary: 'Success', detail: 'User Added'});
         this.router.navigate(['/dash']);
       }
       if (error) {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'User Add Error' });
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'User Add Error'});
       }
     });
   }
 
   onSubmit() {
     const personalInfo = this.newUserForm.get('personalInfo')?.value! as UserProfile;
-    const data:UserProfile = {
+    const data: UserProfile = {
       ...personalInfo,
       identifier: this.newUserForm.get('identifier')?.value
     }

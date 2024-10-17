@@ -139,7 +139,7 @@
       "address": "Digomi Massive",
       "phoneNumber": "568224554",
       "selectedGender": "Man",
-      "profilePicture": "http://localhost:3000/profilePictures/4d94496afb3e185af2bb5868d9af5c7fc2d3c7a7d1822eafaf7e3acace9fbb0b",
+      "profilePicture": "https://via.placeholder.com/150",
       "id": "92b3"
     },
     {
@@ -215,7 +215,7 @@
       "address": "erterg gfgdfg dfg",
       "phoneNumber": "342346345",
       "selectedGender": "Man",
-      "profilePicture": "http://localhost:3000/profilePictures/bf7961020e9fadf26d7256e5d260ecaee2963558bf59be7789f43b9b0492dc48",
+      "profilePicture": "https://via.placeholder.com/150",
       "identifier": "bf7961020e9fadf26d7256e5d260ecaee2963558bf59be7789f43b9b0492dc48",
       "id": "NRlC28n"
     }

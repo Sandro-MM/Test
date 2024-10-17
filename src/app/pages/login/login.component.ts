@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, effect, inject, Signal} from '@angular/core';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {UserCredentialsComponent} from '../../components/user-credentials/user-credentials.component';
-import {ButtonModule } from 'primeng/button';
+import {ButtonModule} from 'primeng/button';
 import {Router} from '@angular/router';
 import {LoginService} from './login.service';
 import {UserLogin} from '../../interfaces/login.model';
@@ -17,7 +17,7 @@ import {MessageService} from 'primeng/api';
     ButtonModule,
     ProgressSpinnerModule
   ],
-  providers:[LoginService],
+  providers: [LoginService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -25,10 +25,10 @@ import {MessageService} from 'primeng/api';
 export class LoginComponent {
   router = inject(Router);
   loginService = inject(LoginService);
-  messageService  = inject(MessageService)
-  isLoading:Signal<boolean> = this.loginService.isLoadingSelector;
-  responseStatus:Signal<boolean> = this.loginService.responseSelector
-  isError:Signal<string | null> = this.loginService.errorMessageSelector;
+  messageService = inject(MessageService)
+  isLoading: Signal<boolean> = this.loginService.isLoadingSelector;
+  responseStatus: Signal<boolean> = this.loginService.responseSelector
+  isError: Signal<string | null> = this.loginService.errorMessageSelector;
   loginForm = new FormGroup({});
 
   constructor() {
@@ -36,11 +36,11 @@ export class LoginComponent {
       const response = this.responseStatus();
       const error = this.isError();
       if (response) {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Login success' });
+        this.messageService.add({severity: 'success', summary: 'Success', detail: 'Login success'});
         this.router.navigate(['/dash']);
       }
       if (error) {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Login error' });
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Login error'});
       }
     });
   }

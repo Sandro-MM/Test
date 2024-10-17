@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, Signal, signal} from '@angular/core';
+import {computed, inject, Injectable, Signal, signal} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {UserProfile} from '../../interfaces/profile.model';
 import {catchError, filter, finalize, Observable, of, tap} from 'rxjs';
@@ -6,11 +6,18 @@ import {ApiService} from '../../api-service/apiService.service';
 import {setErrorMessage} from '../../components/error-handling/api-error-function';
 import {ManageUserComponent} from './manage-user.component';
 
+interface UserState {
+  isLoading: boolean,
+  user: UserProfile | undefined,
+  response: string | null,
+  error: string | null
+}
+
 @Injectable({
   providedIn: ManageUserComponent
 })
 
-export class ManageUserService{
+export class ManageUserService {
   private apiService = inject(ApiService);
   private state = signal<UserState>({
     isLoading: false,
@@ -19,10 +26,10 @@ export class ManageUserService{
     error: null
   })
 
-  isLoadingSelector:Signal<boolean> = computed(() => this.state().isLoading);
-  userSelector:Signal<UserProfile | undefined> = computed(() => this.state().user);
+  isLoadingSelector: Signal<boolean> = computed(() => this.state().isLoading);
+  userSelector: Signal<UserProfile | undefined> = computed(() => this.state().user);
   responseSelector: Signal<any> = computed(() => this.state().response);
-  errorMessageSelector:Signal<string | null> = computed(() => this.state().error);
+  errorMessageSelector: Signal<string | null> = computed(() => this.state().error);
 
   public fetchUser(id: string) {
     this.setLoadingIndicator(true);
@@ -43,7 +50,7 @@ export class ManageUserService{
     this.setLoadingIndicator(true);
     this.apiService.deleteUserById(id).pipe(
       tap(() => {
-          this.setResponse('deleted');
+        this.setResponse('deleted');
       }),
       catchError((err: HttpErrorResponse) => {
         this.handleError(err);
@@ -53,12 +60,12 @@ export class ManageUserService{
     ).subscribe();
   }
 
-  public editUser(id: string, data:UserProfile) {
+  public editUser(id: string, data: UserProfile) {
     this.setLoadingIndicator(true);
 
-    this.apiService.updateUserById(id,data).pipe(
+    this.apiService.updateUserById(id, data).pipe(
       tap((response: any) => {
-          this.setResponse('edited');
+        this.setResponse('edited');
       }),
 
       catchError((err: HttpErrorResponse) => {
@@ -89,30 +96,25 @@ export class ManageUserService{
   }
 
   private setLoadingIndicator(isLoading: boolean) {
-    this.state.update((state:UserState) => ({
+    this.state.update((state: UserState) => ({
       ...state,
       isLoading: isLoading
     }))
   }
 
   private updateUser(user: UserProfile) {
-    this.state.update((state:UserState) => ({
+    this.state.update((state: UserState) => ({
       ...state,
       user: user
     }));
   }
+
   private handleError(err: HttpErrorResponse): Observable<UserProfile> {
     const errorMessage = setErrorMessage(err);
-    this.state.update((state:UserState) => ({
+    this.state.update((state: UserState) => ({
       ...state,
       error: errorMessage
     }));
     return of();
   }
-}
-export interface UserState {
-  isLoading: boolean,
-  user: UserProfile | undefined,
-  response: string | null,
-  error: string | null
 }

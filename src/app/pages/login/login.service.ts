@@ -6,8 +6,14 @@ import {setErrorMessage} from '../../components/error-handling/api-error-functio
 import {UserLogin} from '../../interfaces/login.model';
 import {LoginComponent} from './login.component';
 
+interface LoginState {
+  isLoading: boolean;
+  response: any | null;
+  error: string | null;
+}
+
 @Injectable({
-  providedIn:  LoginComponent,
+  providedIn: LoginComponent,
 })
 export class LoginService {
   private apiService = inject(ApiService);
@@ -75,11 +81,5 @@ export class LoginService {
       error: errorMessage,
     }));
   }
-}
-
-export interface LoginState{
-  isLoading: boolean;
-  response: any | null;
-  error: string | null;
 }
 

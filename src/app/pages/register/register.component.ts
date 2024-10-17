@@ -26,18 +26,18 @@ import {ToastModule} from 'primeng/toast';
     ProgressSpinnerModule,
     ToastModule,
   ],
-  providers:[RegisterService],
+  providers: [RegisterService],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RegisterComponent{
+export class RegisterComponent {
   router = inject(Router)
-  registerService  = inject(RegisterService)
-  messageService  = inject(MessageService)
-  isLoading:Signal<boolean> = this.registerService.isLoadingSelector
-  responseStatus:Signal<boolean> = this.registerService.responseSelector
-  isError:Signal<string | null> = this.registerService.errorMessageSelector
+  registerService = inject(RegisterService)
+  messageService = inject(MessageService)
+  isLoading: Signal<boolean> = this.registerService.isLoadingSelector
+  responseStatus: Signal<boolean> = this.registerService.responseSelector
+  isError: Signal<string | null> = this.registerService.errorMessageSelector
   registerForm = new FormGroup({});
 
   constructor() {
@@ -45,14 +45,15 @@ export class RegisterComponent{
       const response = this.responseStatus();
       const error = this.isError();
       if (response) {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register success' });
+        this.messageService.add({severity: 'success', summary: 'Success', detail: 'Register success'});
         this.router.navigate(['/dash']);
       }
       if (error) {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Register Error' });
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Register Error'});
       }
     });
   }
+
   onSubmit(): void {
     const userData = this.registerForm.value as UserRegister;
     this.registerService.registerUser(userData)

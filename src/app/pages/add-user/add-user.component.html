@@ -1,6 +1,5 @@
-
-<p-button (onClick)="navigateToDash()" icon="pi pi-arrow-left" [rounded]="true" /><label>Add new User</label>
-<form [formGroup]="newUserForm" class="container-register" (ngSubmit)="onSubmit()">
+<p-button (onClick)="navigateToDash()" [rounded]="true" icon="pi pi-arrow-left"/><label>Add new User</label>
+<form (ngSubmit)="onSubmit()" [formGroup]="newUserForm" class="container-register">
   <label>Fill User Details</label>
   <app-user-profile-info/>
   <label>Generate identifier</label>
@@ -8,8 +7,10 @@
 </form>
 
 
-@if(!isLoading()){
-  <p-button (onClick)="onSubmit()" [disabled]="this.newUserForm.invalid" label="Create User" [style]="{margin:'auto', display: 'block'}" type="submit"/>
+@if (!isLoading()) {
+  <p-button (onClick)="onSubmit()" [disabled]="this.newUserForm.invalid" label="Create User"
+            [style]="{margin:'auto', display: 'block'}" type="submit"/>
 } @else {
-  <p-progressSpinner strokeWidth="5" [style]="{margin:'0 auto', display:'block', width:'50px', height:'50px'}"  ariaLabel="loading" />
+  <p-progressSpinner strokeWidth="5" [style]="{margin:'0 auto', display:'block', width:'50px', height:'50px'}"
+                     ariaLabel="loading"/>
 }

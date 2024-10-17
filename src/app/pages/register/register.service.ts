@@ -6,6 +6,12 @@ import {setErrorMessage} from '../../components/error-handling/api-error-functio
 import {UserRegister} from '../../interfaces/register.model';
 import {RegisterComponent} from './register.component';
 
+interface RegisterState {
+  isLoading: boolean;
+  response: any | null;
+  error: string | null;
+}
+
 @Injectable({
   providedIn: RegisterComponent,
 })
@@ -75,11 +81,5 @@ export class RegisterService {
       error: errorMessage,
     }));
   }
-}
-
-export interface RegisterState {
-  isLoading: boolean;
-  response: any | null;
-  error: string | null;
 }
 

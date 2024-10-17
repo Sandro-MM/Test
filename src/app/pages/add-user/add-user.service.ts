@@ -1,11 +1,16 @@
 import {computed, inject, Injectable, Signal, signal} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
-import {catchError, delay, finalize, of, tap} from 'rxjs';
+import {catchError, finalize, of, tap} from 'rxjs';
 import {ApiService} from '../../api-service/apiService.service';
 import {setErrorMessage} from '../../components/error-handling/api-error-function';
 import {AddUserComponent} from './add-user.component';
 import {UserProfile} from '../../interfaces/profile.model';
 
+interface AddUserState {
+  isLoading: boolean;
+  response: any | null;
+  error: string | null;
+}
 
 @Injectable({
   providedIn: AddUserComponent,
@@ -73,11 +78,5 @@ export class AddUserService {
       error: errorMessage,
     }));
   }
-}
-
-export interface AddUserState {
-  isLoading: boolean;
-  response: any | null;
-  error: string | null;
 }
 

@@ -7,6 +7,7 @@ import {ButtonModule} from 'primeng/button';
 import {Router} from '@angular/router';
 import {UsersDashboardService} from './users-dashboard.service';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {Message} from 'primeng/message';
 
 
 @Component({
@@ -18,12 +19,14 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     UserProfileComponent,
     ButtonModule,
     ProgressSpinnerModule,
+    Message,
   ],
+  providers: [UsersDashboardService],
   templateUrl: './users-dashboard.component.html',
   styleUrl: './users-dashboard.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UsersDashboardComponent{
+export class UsersDashboardComponent {
   router = inject(Router);
   usersDashboardService = inject(UsersDashboardService);
   visible = false;
@@ -59,7 +62,7 @@ export class UsersDashboardComponent{
 
   loadData(event: any) {
     console.log(event)
-    const { first, rows, sortField, sortOrder, filters } = event;
+    const {first, rows, sortField, sortOrder, filters} = event;
     this.usersDashboardService.fetchUsers(first, rows, sortField, sortOrder, filters);
   }
 }
