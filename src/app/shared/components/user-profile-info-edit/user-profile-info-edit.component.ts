@@ -5,7 +5,7 @@ import {FileUploadModule} from 'primeng/fileupload';
 import {ErrorContextDirective} from '../error-handling/form-error-handling/error-context.directive';
 import {englishLettersPattern, phonePattern, pinPattern} from '../error-handling/form-error-handling/pattern-formats';
 import {RadioGroupComponent} from '../radio-group/radio-group.component';
-import {UserProfile} from '../../interfaces/profile.model';
+import {UserProfile} from '../../shared/interfaces/profile.model';
 
 @Component({
   selector: 'app-user-profile-info',

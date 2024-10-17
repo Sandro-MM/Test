@@ -4,7 +4,7 @@ import {UserProfileInfoEditComponent} from '../../components/user-profile-info-e
 import {UserIdentifierComponent} from '../../components/user-identifier/user-identifier.component';
 import {ButtonModule} from 'primeng/button';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserProfile} from '../../interfaces/profile.model';
+import {UserProfile} from '../../shared/interfaces/profile.model';
 import {ChipModule} from 'primeng/chip';
 import {ManageUserService} from './manage-user.service';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';

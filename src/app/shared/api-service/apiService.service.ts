@@ -4,7 +4,7 @@ import {UserProfile} from '../interfaces/profile.model';
 import {from, map, Observable, of, switchMap} from 'rxjs';
 import {UserLogin} from '../interfaces/login.model';
 import {UserRegister} from '../interfaces/register.model';
-import {apiUrl} from '../../environments/environment';
+import {apiUrl} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

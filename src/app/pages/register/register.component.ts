@@ -8,7 +8,7 @@ import {UserProfileInfoEditComponent} from '../../components/user-profile-info-e
 import {Router} from '@angular/router';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {RegisterService} from './register.service';
-import {UserRegister} from '../../interfaces/register.model';
+import {UserRegister} from '../../shared/interfaces/register.model';
 import {MessageService} from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
 

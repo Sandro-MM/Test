@@ -1,10 +1,11 @@
 import {computed, inject, Injectable, Signal, signal} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {catchError, finalize, of, tap} from 'rxjs';
-import {ApiService} from '../../api-service/apiService.service';
-import {setErrorMessage} from '../../components/error-handling/api-error-function';
+import {ApiService} from '../../shared/api-service/apiService.service';
+import {setErrorMessage} from '../../shared/functions/api-error/api-error-function';
 import {AddUserComponent} from './add-user.component';
-import {UserProfile} from '../../interfaces/profile.model';
+import {UserProfile} from '../../shared/interfaces/profile.model';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 interface AddUserState {
   isLoading: boolean;
@@ -36,6 +37,7 @@ export class AddUserService {
           this.setResponse(true);
         }
       }),
+      takeUntilDestroyed(),
       catchError((err: HttpErrorResponse) => {
         this.handleError(err);
         return of(undefined);

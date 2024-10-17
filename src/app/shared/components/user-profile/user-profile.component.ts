@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {UserProfile} from '../../interfaces/profile.model';
+import {UserProfile} from '../../shared/interfaces/profile.model';
 import {AvatarModule} from 'primeng/avatar';
 import {ChipModule} from 'primeng/chip';
 

@@ -1,11 +1,12 @@
 import {computed, inject, Injectable, Signal, signal} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
-import {UserProfile} from '../../interfaces/profile.model';
+import {UserProfile} from '../../shared/interfaces/profile.model';
 import {catchError, finalize, Observable, of, tap} from 'rxjs';
-import {ApiService} from '../../api-service/apiService.service';
-import {setErrorMessage} from '../../components/error-handling/api-error-function';
-import {buildQuery} from '../../functions/querry-function/querry-function';
+import {ApiService} from '../../shared/api-service/apiService.service';
+import {setErrorMessage} from '../../shared/functions/api-error/api-error-function';
+import {buildQuery} from '../../shared/functions/querry-function/querry-function';
 import {UsersDashboardComponent} from './users-dashboard.component';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 interface UserListState {
   isLoading: boolean,
@@ -43,6 +44,7 @@ export class UsersDashboardService {
     const query = buildQuery(page, pageSize, sortField, sortOrder, filters);
     this.apiService.getList(query).pipe(
       tap(response => this.updateUsersList(response.users, response.totalRecords)),
+      takeUntilDestroyed(),
       catchError((err: HttpErrorResponse) => this.handleError(err)),
       finalize(() => this.setLoadingIndicator(false))
     ).subscribe();

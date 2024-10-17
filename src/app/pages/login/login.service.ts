@@ -1,10 +1,11 @@
 import {computed, inject, Injectable, Signal, signal} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {catchError, delay, finalize, of, tap} from 'rxjs';
-import {ApiService} from '../../api-service/apiService.service';
-import {setErrorMessage} from '../../components/error-handling/api-error-function';
-import {UserLogin} from '../../interfaces/login.model';
+import {ApiService} from '../../shared/api-service/apiService.service';
+import {setErrorMessage} from '../../shared/functions/api-error/api-error-function';
+import {UserLogin} from '../../shared/interfaces/login.model';
 import {LoginComponent} from './login.component';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 interface LoginState {
   isLoading: boolean;
@@ -39,6 +40,7 @@ export class LoginService {
         this.setResponse(true);
       }),
       delay(1000),
+      takeUntilDestroyed(),
       catchError((err: HttpErrorResponse) => {
         this.handleError(err);
         return of(undefined);

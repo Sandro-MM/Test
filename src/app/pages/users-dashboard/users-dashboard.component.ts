@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, inject, Signal} from '@angular/core';
 import {TableComponentComponent} from '../../components/list-component/table-component.component';
 import {DialogModule} from 'primeng/dialog';
-import {UserProfile} from '../../interfaces/profile.model';
+import {UserProfile} from '../../shared/interfaces/profile.model';
 import {UserProfileComponent} from '../../components/user-profile/user-profile.component';
 import {ButtonModule} from 'primeng/button';
 import {Router} from '@angular/router';

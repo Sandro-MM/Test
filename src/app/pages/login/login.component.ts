@@ -4,7 +4,7 @@ import {UserCredentialsComponent} from '../../components/user-credentials/user-c
 import {ButtonModule} from 'primeng/button';
 import {Router} from '@angular/router';
 import {LoginService} from './login.service';
-import {UserLogin} from '../../interfaces/login.model';
+import {UserLogin} from '../../shared/interfaces/login.model';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {MessageService} from 'primeng/api';
 
