@@ -1,5 +1,6 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <label>ავტორიზაცია პირობითია უბრალოდ ვალიდაციაში მოხვდეს</label>
+  <label>ავტორიზაცია პირობითია</label>
+  <label>უბრალოდ ვალიდაციაში მოხვდეს</label>
   <label>Enter credentials to log in</label>
   <app-user-credentials/>
   @if (!isLoading()){
