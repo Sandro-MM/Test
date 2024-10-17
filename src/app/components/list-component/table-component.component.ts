@@ -28,12 +28,14 @@ import {Router} from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponentComponent implements OnInit {
-  @Input()stateKey ='defaultTable'
+  @Input()stateKey ='defaultTable';
+  @Input({required:true})columns: string[] =[];
+  @Input()loading = true;
+  @Input({required: true})totalRecords = 0;
+  @Input({required: true}) data : any;
   @Output() rowClick = new EventEmitter<any>();
+  @Output() lazyEmit = new EventEmitter<any>();
 
-  @Input() data : any
-
-  columns: string[] = [];
   router = inject(Router)
   ngOnInit() {
 

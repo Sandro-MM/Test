@@ -1,106 +1,117 @@
 import {inject, Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {UserProfile} from '../interfaces/profile.model';
-import {from, Observable, of, switchMap} from 'rxjs';
+import {from, map, Observable, of, switchMap} from 'rxjs';
 import {UserLogin} from '../interfaces/login.model';
 import {UserRegister} from '../interfaces/register.model';
-import {addDoc, collection, deleteDoc, doc, Firestore, getDoc, getDocs, updateDoc} from '@angular/fire/firestore';
-import { Storage, ref, uploadBytes, getDownloadURL } from '@angular/fire/storage';
+import {apiUrl} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  http = inject(HttpClient)
-  firestore: Firestore = inject(Firestore);
-  storage: Storage = inject(Storage);
+ private  apiUrl = apiUrl
+ private http = inject(HttpClient)
 
-  getList(): Observable<UserProfile[]> {
-    const usersCollection = collection(this.firestore, 'users');
-    return from(
-      getDocs(usersCollection).then((querySnapshot) =>
-        querySnapshot.docs.map((doc) => {
-          const data = doc.data();
-          return {
-            firstName: data['firstName'],
-            lastName: data['lastName'],
-            pin: data['pin'],
-            address: data['address'],
-            phoneNumber: data['phoneNumber'],
-            selectedGender: data['selectedGender'],
-            profilePicture: data['profilePicture'],
-            identifier: doc.id,
-          } as UserProfile;
-        })
-      )
-    );
-  }
 
-  getUserById(identifier: string): Observable<UserProfile | undefined> {
-    const userDocRef = doc(this.firestore, `users/${identifier}`);
-    return from(
-      getDoc(userDocRef).then((docSnap) => {
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          return {
-            firstName: data['firstName'],
-            lastName: data['lastName'],
-            pin: data['pin'],
-            address: data['address'],
-            phoneNumber: data['phoneNumber'],
-            selectedGender: data['selectedGender'],
-            profilePicture: data['profilePicture'],
-            identifier: docSnap.id,
-          } as UserProfile;
-        } else {
-          return undefined;
+  getList(
+    page: number,
+    pageSize: number,
+    sortField?: string,
+    sortOrder?: number,
+    filters?: { [key: string]: any }
+  ): Observable<{ users: UserProfile[]; totalRecords: number }> {
+    let query = `?_page=${page/pageSize + 1}&_limit=${pageSize}`;
+    if (sortField) {
+      query += `&_sort=${sortField}&_order=${sortOrder === 1 ? 'asc' : 'desc'}`;
+    }
+    if (filters) {
+      Object.keys(filters).forEach((key) => {
+        const filter = filters[key];
+        if (filter.value) {
+          switch (filter.matchMode) {
+            case 'startsWith':
+              query += `&${key}_like=${filter.value}`;
+              break;
+            case 'contains':
+              query += `&${key}_like=${filter.value}`;
+              break;
+            case 'equals':
+              query += `&${key}=${filter.value}`;
+              break;
+            case 'endsWith':
+              query += `&${key}_like=${filter.value}`;
+              break;
+            case 'notEquals':
+              query += `&${key}_ne=${filter.value}`;
+              break;
+            default:
+              break;
+          }
         }
+      });
+    }
+
+
+    return this.http.get<UserProfile[]>(`${this.apiUrl}${query}`, { observe: 'response' }).pipe(
+      map(response => {
+        // Extract total record count from the 'X-Total-Count' header
+        const totalRecords = Number(response.headers.get('X-Total-Count')) || 0;
+        return {
+          users: response.body ?? [],
+          totalRecords
+        };
       })
     );
   }
 
+  getUserById(identifier: string): Observable<UserProfile | undefined> {
+    return this.http.get<UserProfile>(`${this.apiUrl}/${identifier}`);
+  }
+
   updateUserById(identifier: string, updatedData: Partial<UserProfile>): Observable<void> {
-    const userDocRef = doc(this.firestore, `users/${identifier}`);
     if (updatedData.profilePicture && updatedData.profilePicture.objectURL) {
       const filePath = `profilePictures/${identifier}`;
       return this.uploadProfilePicture(updatedData.profilePicture.objectURL.changingThisBreaksApplicationSecurity, filePath).pipe(
         switchMap((downloadURL) => {
           updatedData.profilePicture = downloadURL;
-          return from(updateDoc(userDocRef, { ...updatedData }));
+          return this.http.put<void>(`${this.apiUrl}/${identifier}`, updatedData);
         })
       );
     } else {
-      return from(updateDoc(userDocRef, { ...updatedData }));
+      return this.http.put<void>(`${this.apiUrl}/${identifier}`, updatedData);
     }
   }
 
   deleteUserById(identifier: string): Observable<void> {
-    const userDocRef = doc(this.firestore, `users/${identifier}`);
-    return from(deleteDoc(userDocRef));
+    return this.http.delete<void>(`${this.apiUrl}/${identifier}`);
   }
 
   createUser(newUser: UserProfile): Observable<any> {
-    const usersCollection = collection(this.firestore, 'users');
+   console.log(newUser)
     if (newUser.profilePicture && newUser.profilePicture.objectURL) {
       const filePath = `profilePictures/${newUser.identifier}`;
       return this.uploadProfilePicture(newUser.profilePicture.objectURL.changingThisBreaksApplicationSecurity, filePath).pipe(
         switchMap((downloadURL) => {
           newUser.profilePicture = downloadURL;
-          return from(addDoc(usersCollection, { ...newUser }));
+          return this.http.post<any>(this.apiUrl, newUser);
         })
       );
     } else {
-      return from(addDoc(usersCollection, { ...newUser }));
+      return this.http.post<any>(this.apiUrl, newUser);
     }
   }
-  //ესე ფრონტიდან ძალიან არ მომწონს სურათის დამატება მარა Firebase ში პირდაპირ სხვა გზა არაა...
+
   private uploadProfilePicture(blobUrl: string, path: string): Observable<string> {
     return from(fetch(blobUrl).then((response) => response.blob())).pipe(
       switchMap((blob) => {
-        const fileRef = ref(this.storage, path);
-        return from(uploadBytes(fileRef, blob)).pipe(
-          switchMap(() => getDownloadURL(fileRef))
-        );
+        // Simulate the file upload by using a mock file server or handle it locally
+        // For now, return a placeholder URL or handle the upload logic
+        const mockDownloadURL = `http://localhost:3000/${path}`;
+        return new Observable<string>((observer) => {
+          observer.next(mockDownloadURL);
+          observer.complete();
+        });
       })
     );
   }

@@ -28,10 +28,22 @@ export class UsersDashboardComponent{
   route = inject(ActivatedRoute);
   usersDashboardService = inject(UsersDashboardService);
   visible = false;
+  columns: string[] = [
+    "id",
+    "firstName",
+    "lastName",
+    "pin",
+    "address",
+    "phoneNumber",
+    "selectedGender",
+    "profilePicture",
+    "identifier"
+  ];
   userData: UserProfile | null = null;
   isLoading: Signal<boolean> = this.usersDashboardService.isLoadingSelector;
   isError: Signal<string | null> = this.usersDashboardService.errorMessageSelector;
   usersList: Signal<UserProfile[] | undefined> = this.usersDashboardService.usersListSelector;
+  totalRecords: Signal<number> = this.usersDashboardService.totalRecords;
 
   openProfile(event: UserProfile) {
     this.userData = event;
@@ -44,5 +56,11 @@ export class UsersDashboardComponent{
 
   addUser() {
     this.router.navigate(['/add-user']);
+  }
+
+  loadData(event: any) {
+    console.log(event)
+    const { first, rows, sortField, sortOrder, filters } = event;
+    this.usersDashboardService.fetchUsers(first, rows, sortField, sortOrder, filters);
   }
 }

@@ -25,7 +25,6 @@ export class AddUserService {
 
   public addUser(userData: UserProfile) {
     this.setLoadingIndicator(true);
-
     this.apiService.createUser(userData).pipe(
       tap((response: any) => {
         if (response) {

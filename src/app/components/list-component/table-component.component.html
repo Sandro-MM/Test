@@ -1,4 +1,15 @@
-<p-table [stateKey]="stateKey" [stateStorage]="'local'" [value]="data!" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20, 50]" stripedRows  stateStorage="session">
+<p-table [stateKey]="stateKey"
+         [stateStorage]="'local'"
+         [value]="data!"
+         [lazy]="true"
+         (onLazyLoad)="lazyEmit.emit($event)"
+         [paginator]="true"
+         [totalRecords]="totalRecords"
+         [loading]="loading"
+         [rows]="5"
+         [rowsPerPageOptions]="[5, 10, 20, 50]"
+         stripedRows
+         stateStorage="session">
   <ng-template pTemplate="header">
     <tr>
       @for (col of columns; track ($index + 'titlecase')) {

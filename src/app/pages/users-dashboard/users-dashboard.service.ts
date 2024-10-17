@@ -16,20 +16,36 @@ export class UsersDashboardService{
   private state = signal<UserListState>({
     isLoading: false,
     usersList: undefined,
-    error: null
+    error: null,
+    totalRecords: 0
   })
 
   isLoadingSelector:Signal<boolean> = computed(() => this.state().isLoading);
   usersListSelector:Signal<UserProfile[] | undefined> = computed(() => this.state().usersList);
+  totalRecords:Signal<number> = computed(() => this.state().totalRecords);
   errorMessageSelector:Signal<string | null> = computed(() => this.state().error);
 
-  public fetchUsers() {
+  public fetchUsers(
+    page: number,
+    pageSize: number,
+    sortField?: string,
+    sortOrder?: number,
+    filters?: { [key: string]: any }
+  ) {
     this.setLoadingIndicator(true);
-    this.apiService.getList().pipe(
-      tap((list:UserProfile[]) => this.updateUsersList(list)),
+    this.apiService.getList(page, pageSize, sortField, sortOrder, filters).pipe(
+      tap(response => this.updateUsersList(response.users, response.totalRecords)),
       catchError((err: HttpErrorResponse) => this.handleError(err)),
       finalize(() => this.setLoadingIndicator(false))
     ).subscribe();
+  }
+
+  private updateUsersList(users: UserProfile[], totalRecords: number) {
+    this.state.update((state: UserListState) => ({
+      ...state,
+      usersList: users,
+      totalRecords: totalRecords
+    }));
   }
 
   private setLoadingIndicator(isLoading: boolean) {
@@ -39,12 +55,6 @@ export class UsersDashboardService{
     }))
   }
 
-  private updateUsersList(list: UserProfile[]) {
-    this.state.update((state:UserListState) => ({
-      ...state,
-      usersList: list
-    }));
-  }
   private handleError(err: HttpErrorResponse): Observable<UserProfile[]> {
     const errorMessage = setErrorMessage(err);
     this.state.update((state:UserListState) => ({
@@ -57,5 +67,6 @@ export class UsersDashboardService{
 export interface UserListState {
   isLoading: boolean,
   usersList: UserProfile[] | undefined,
+  totalRecords: number
   error: string | null
 }
