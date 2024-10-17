@@ -55,7 +55,6 @@ export class ApiService {
 
     return this.http.get<UserProfile[]>(`${this.apiUrl}${query}`, { observe: 'response' }).pipe(
       map(response => {
-        // Extract total record count from the 'X-Total-Count' header
         const totalRecords = Number(response.headers.get('X-Total-Count')) || 0;
         return {
           users: response.body ?? [],
@@ -105,8 +104,6 @@ export class ApiService {
   private uploadProfilePicture(blobUrl: string, path: string): Observable<string> {
     return from(fetch(blobUrl).then((response) => response.blob())).pipe(
       switchMap((blob) => {
-        // Simulate the file upload by using a mock file server or handle it locally
-        // For now, return a placeholder URL or handle the upload logic
         const mockDownloadURL = `http://localhost:3000/${path}`;
         return new Observable<string>((observer) => {
           observer.next(mockDownloadURL);

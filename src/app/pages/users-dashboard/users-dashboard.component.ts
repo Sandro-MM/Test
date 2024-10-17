@@ -4,7 +4,7 @@ import {DialogModule} from 'primeng/dialog';
 import {UserProfile} from '../../interfaces/profile.model';
 import {UserProfileComponent} from '../../components/user-profile/user-profile.component';
 import {ButtonModule} from 'primeng/button';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {UsersDashboardService} from './users-dashboard.service';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
@@ -25,7 +25,6 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
 })
 export class UsersDashboardComponent{
   router = inject(Router);
-  route = inject(ActivatedRoute);
   usersDashboardService = inject(UsersDashboardService);
   visible = false;
   columns: string[] = [
